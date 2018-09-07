@@ -1,4 +1,4 @@
-# docker-terragrunt 
+# terragrunt 
 
 
 ## How or why to use this project
