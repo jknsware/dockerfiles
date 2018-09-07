@@ -1,4 +1,4 @@
-# Docker Google Domains DDNS
+# Google Domains DDNS
 
 
 ## Intent

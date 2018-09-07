@@ -11,7 +11,7 @@ What is Plex Media Server?
 
 [Plex Media Server](https://plex.tv/) organizes your video, music, and photo collections and streams them to all of your screens (mobile, TV/Chromecast, laptop...).
 
-![Plex Logo](https://github.com/jknsware/docker-plex-media-server/blob/master/docs/plex-logo.png?raw=true)
+![Plex Logo](./docs/plex-logo.png)
 
 
 How to use this image
