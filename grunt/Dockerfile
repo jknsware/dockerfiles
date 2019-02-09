@@ -27,15 +27,15 @@ RUN apt-get update \
     git \
     tree \
     python3 \
+    python3-pip \
+    python3-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Install AWSCLI
-RUN mkdir -p /ci/pip \
-    && wget -nv -O /ci/pip/get-pip.py https://bootstrap.pypa.io/get-pip.py \
-    && python3 get-pip.py --user \
-    && export PATH=~/.local/bin:$PATH \
-    && pip install awscli --upgrade --user
+RUN pip3 install wheel \
+    && pip3 install --upgrade setuptools \
+    && pip3 install awscli --upgrade --user
 
 # Install Terraform
 
