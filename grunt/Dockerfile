@@ -1,21 +1,21 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
-LABEL image_name=jknsware/docker-grunt \
+LABEL image_name=jknsware/grunt \
   description="Container with Terragrunt/form" \
   maintainer="jason@jknsware.com" \
-  dockerfile_location=https://github.com/jknsware/docker-terragrunt/Dockerfile \
-  base_image=ubuntu:16.04
+  dockerfile_location=https://github.com/jknsware/dockerfiles/terragrunt \
+  base_image=ubuntu:18.04
 
 # Set environment variables
 
-ENV TERRAFORM_VERSION 0.11.1
+ENV TERRAFORM_VERSION 0.10.8
 ENV TERRAGRUNT_VERSION v0.13.23
 
 # Copy bash files
 
 COPY docker/ /
 
-# Upgrade Ubuntu and install required packages
+# Update Ubuntu and install required packages
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -26,8 +26,16 @@ RUN apt-get update \
     vim \
     git \
     tree \
+    python3 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Install AWSCLI
+RUN mkdir -p /ci/pip \
+    && wget -nv -O /ci/pip/get-pip.py https://bootstrap.pypa.io/get-pip.py \
+    && python3 get-pip.py --user \
+    && export PATH=~/.local/bin:$PATH \
+    && pip install awscli --upgrade --user
 
 # Install Terraform
 
