@@ -60,17 +60,17 @@ Example:
 ENV TERRAFORM_VERSION 0.9.11
 ENV TERRAGRUNT_VERSION v0.12.16
 
-docker build . --tag jknsware/docker-terragrunt:0.9.11.0.12.16
+docker build . --tag jknsware/docker-terragrunt:0.x
 ```
 
 
 ### Tagged Verions
 
-|Tagged Version|Terraform Version|Terragrunt Version|
-|--------------|------------------|-----------------|
-|0.9.11.0.12.16|0.9.11|0.12.16|
-|0.11.1.0.13.23|0.11.1|0.13.23|
-|0.11.13.0.18.3|0.11.13|0.18.3|
+|Tagged Version|Terraform Version|Terragrunt Version|MySQL Version|
+|--------------|------------------|-----------------|-------------|
+|0.9.11.0.12.16|0.9.11|0.12.16| |
+|0.11.1.0.13.23|0.11.1|0.13.23| |
+|0.5|0.11.13|0.18.3|5.7.27|
 
 ### External Links
 
