@@ -8,8 +8,12 @@ LABEL image_name=jknsware/grunt \
 
 # Set environment variables
 
-ENV TERRAFORM_VERSION 0.10.8
-ENV TERRAGRUNT_VERSION v0.13.23
+ENV TERRAFORM_VERSION 0.11.13
+ENV TERRAGRUNT_VERSION v0.18.3
+ENV MYSQL_VERSION=5.7.27
+# ENV AWS_SESSION_TOKEN
+# ENV AWS_SECRET_ACCESS_KEY
+# ENV AWS_ACCESS_KEY_ID
 
 # Copy bash files
 
@@ -19,8 +23,11 @@ COPY docker/ /
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    bash-completion \
+    mysql-server=${MYSQL_VERSION}* \
     openssh-client \
     ca-certificates \
+    jq \
     wget \
     unzip \
     vim \
@@ -50,3 +57,5 @@ RUN mkdir -p /ci/terragrunt-${TERRAGRUNT_VERSION}/ \
     && chmod u+x /ci/terragrunt-${TERRAGRUNT_VERSION}/terragrunt \
     && cp /ci/terragrunt-${TERRAGRUNT_VERSION}/terragrunt /usr/local/bin \
     && rm -rf /ci
+
+CMD ["/bin/bash"]

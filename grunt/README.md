@@ -1,5 +1,4 @@
-# terragrunt 
-
+# terragrunt
 
 ## How or why to use this project
 
@@ -7,7 +6,7 @@ I needed a way to run terragrunt/form in a clean environment so I can lock down 
 
 I have my Mac `~/` folder setup to have this folder structure:
 
-```
+```bash
 .
 ├── .Trash
 ├── .aws
@@ -41,15 +40,23 @@ Assuming this same setup, use the `docker run` example, run it from `~/`, and al
 
 Example:
 
+With Git
+
+```bash
+docker run -it --rm -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -e AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN} --mount type=bind,source=${PWD}/.ssh-docker,target=/root/.ssh,readonly --mount type=bind,source=${PWD}/git,target=/root/git --mount type=bind,source=${PWD}/.gitconfig,target=/root/.gitconfig,readonly --mount type=bind,source=${PWD}/.aws,target=/root/.aws,readonly --name terragrunt --hostname docker-terragrunt jknsware/docker-terragrunt:<terragrunt-version.terraform-version> /bin/bash
 ```
-docker run -it --mount type=bind,source=${PWD}/.ssh-docker,target=/root/.ssh,readonly --mount type=bind,source=${PWD}/git,target=/root/git --mount type=bind,source=${PWD}/.gitconfig,target=/root/.gitconfig,readonly --mount type=bind,source=${PWD}/.aws,target=/root/.aws,readonly --name terragrunt --hostname docker-terragrunt jknsware/docker-terragrunt:<terragrunt-version.terraform-version> /bin/bash
+
+Without Git
+
+```bash
+$ docker run -it --rm -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -e AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN} --mount type=bind,source=${PWD}/.ssh,target=/root/.ssh,readonly --mount type=bind,source=${PWD}/.aws,target=/root/.aws,readonly --name terragrunt --hostname docker-terragrunt jknsware/docker-terragrunt:<terragrunt-version.terraform-version>
 ```
 
 Containers are versioned based on `terragrunt-version.terraform-version`.
 
 Example:
 
-```
+```bash
 ENV TERRAFORM_VERSION 0.9.11
 ENV TERRAGRUNT_VERSION v0.12.16
 
@@ -63,6 +70,7 @@ docker build . --tag jknsware/docker-terragrunt:0.9.11.0.12.16
 |--------------|------------------|-----------------|
 |0.9.11.0.12.16|0.9.11|0.12.16|
 |0.11.1.0.13.23|0.11.1|0.13.23|
+|0.11.13.0.18.3|0.11.13|0.18.3|
 
 ### External Links
 
